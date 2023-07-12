@@ -7,6 +7,7 @@ use App\Http\Requests\StoreProjectRequest;
 use App\Http\Requests\UpdateProjectRequest;
 use App\Models\Type;
 use App\Models\Project;
+use App\Models\Technology;
 
 class ProjectController extends Controller
 {
@@ -30,7 +31,9 @@ class ProjectController extends Controller
     public function create()
     {
         $types = Type::all();
-        return view("admin.projects.create", compact("types"));
+        $interests = Technology::all();
+
+        return view("admin.projects.create", compact("types", "interests"));
     }
 
     
@@ -42,6 +45,7 @@ class ProjectController extends Controller
      */
     public function store(StoreProjectRequest $request)
     {
+        
         $data = $request->validated();
 
         $newProject =  new Project;
@@ -49,7 +53,9 @@ class ProjectController extends Controller
     
         $newProject->save();
 
-        return redirect()->route('admin.projects.show', $newProject->id);
+        $newProject->technology()->sync( $data["interests"] );
+
+        return to_route('admin.projects.show', $newProject);
     }
 
     /**
@@ -72,7 +78,9 @@ class ProjectController extends Controller
     public function edit(Project $project)
     {
         $types = Type::all();
-        return view("admin.projects.edit", compact ("project", "types"));
+        $interests = Technology::all();
+
+        return view("admin.projects.edit", compact ("project", "types", "interests"));
     }
 
     /**
@@ -85,12 +93,13 @@ class ProjectController extends Controller
     public function update(UpdateProjectRequest $request, Project $project)
     {
         $data = $request->validated();
-
         $project->fill($data);
-    
         $project->update();
 
-        return redirect()->route('admin.projects.show', $project->id);
+        $project->technology()->sync( $data["interests"] );
+
+        
+        return to_route('admin.projects.show', $project);
     }
 
     /**

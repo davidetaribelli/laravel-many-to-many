@@ -15,14 +15,13 @@ class TypeSeeder extends Seeder
      */
     public function run()
     {
-        {   
-            $types = config("typeTravel");
+        $types = config("typeTravel");
     
-            foreach ($types as $type) { 
-                $newType = new Type();
-                $newType->travel = $type;
-                $newType->save();   
-            }
-        }
+        foreach ($types as $type) { 
+            $newType = new Type();
+            $newType->travel = $type;
+            $newType->save();   
+        }  
+            
     }
 }

@@ -28,7 +28,8 @@ class StoreProjectRequest extends FormRequest
             "description"=>"required|min:5|max:65535",
             "thumb"=>"nullable|max:65535",
             "link"=>"nullable|max:65535",
-            "type_id"=> "exists:types,id"
+            "type_id"=> "nullable|exists:types,id",
+            "interests" => "nullable|exists:technologies,id"
         ];
     }
     public function messages(){

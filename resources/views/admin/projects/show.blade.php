@@ -11,6 +11,11 @@
             <h2 class="border-bottom my-2 py-2">{{$project->type->travel}}</h2>
             <h3 class="border-bottom my-2 py-2">{{$project->title}}</h3>
             <p class="fs-4 border-bottom my-2 py-2">{{$project->description}}</p>
+            <ul>
+                @foreach ($project->technology as $interest)
+                    <li>{{$interest->name}}</li>
+                @endforeach
+            </ul> 
             <a class="text-decoration-none" href="{{$project->link}}"> <small class="text-white">{{$project->link}}</small></a>
         </div>
         </div>

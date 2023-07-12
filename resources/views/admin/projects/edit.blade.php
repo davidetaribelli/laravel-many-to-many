@@ -46,6 +46,15 @@
                                 <div class="invalid-feedback">{{$message}}</div>
                             @enderror
                         </div>
+                        <div class="input-group mb-3 bg_orange c_violet d-flex flex-column p-3 rounded-3">
+                            <h5>Interests of the city:</h5>
+                            @foreach ($interests as $i => $interest)
+                            <div class="form-check d-flex align-items-center mx-3">
+                                <input class="form-check-input mt-0" aria-label="Checkbox for following text input" type="checkbox" value="{{$interest->id}}" name="interests[]" id="interests{{$i}}">
+                                <label class="form-check-label mx-2" for="interests{{$i}}">{{$interest->name}}</label>
+                            </div>
+                            @endforeach
+                        </div>
                         <button type="submit" class="text-white input-group-text bg_blue me-3 border-0 bg_orange">Submit</button>
                     </form>
                 </div>
