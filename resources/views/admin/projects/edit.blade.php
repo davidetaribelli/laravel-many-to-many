@@ -6,7 +6,7 @@
         <div class="row">
             <div class="col-12 d-flex align-items-center p-4">
                 <div class="col-7 my-3">
-                    <form action="{{route('admin.projects.update', $project->id)}}" method="POST">
+                    <form action="{{route('admin.projects.update', $project->id)}}" method="POST" enctype="multipart/form-data">
                         @csrf
 
                         @method("PUT")
@@ -33,8 +33,7 @@
                             @enderror
                         </div>
                         <div class="input-group input-group-sm mb-3">
-                            <label class="text-white input-group-text bg_blue me-3 border-0 bg_orange" for="thumb">Thumb</label>
-                            <input type="text" name="thumb" placeholder="Insert thumb" value="{{ old("thumb") ?? $project->thumb}}"  class="px-3 py-2 border border-secondary form-control rounded-end @error('thumb') is-invalid @enderror">
+                            <input type="file" name="thumb" id="thumb" class="form-control mb-4 bg_orange">
                             @error("thumb")
                                 <div class="invalid-feedback">{{$message}}</div>
                             @enderror
